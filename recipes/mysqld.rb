@@ -154,11 +154,11 @@ template "#{node['ndb']['scripts_dir']}/drop-disk-table.sh" do
     mode 0700
 end
 
-if node['ndb']['enabled'] == "true"
-  ndb_mysql_ndb "install" do
-   action :install_distributed_privileges
-  end
-end
+#if node['ndb']['enabled'] == "true"
+#  ndb_mysql_ndb "install" do
+#   action :install_distributed_privileges
+#  end
+#end
 
 if node['kagent']['enabled'] == "true"
   kagent_config service_name do
