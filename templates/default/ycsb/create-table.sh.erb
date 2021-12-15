@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
-/srv/hops/mysql/bin/mysql -u<%= node['mysql']['benchmark_user'] %> -p<%= node['mysql']['benchmark_user_password'] %> -h<%= @mysqld_host %> --protocol=TCP ycsb -e "DROP TABLE IF EXISTS usertable"
-/srv/hops/mysql/bin/mysql -u<%= node['mysql']['benchmark_user'] %> -p<%= node['mysql']['benchmark_user_password'] %> -h<%= @mysqld_host %> --protocol=TCP ycsb -e "CREATE TABLE usertable (YCSB_KEY VARCHAR(255) PRIMARY KEY, FIELD0 varchar(100), FIELD1 varchar(100), FIELD2 varchar(100), FIELD3 varchar(100), FIELD4 varchar(100), FIELD5 varchar(100), FIELD6 varchar(100), FIELD7 varchar(100), FIELD8 varchar(100), FIELD9 varchar(100))"
+CREATE USER IF NOT EXISTS <%= node['mysql']['benchmark_user'] %>@'%' IDENTIFIED BY '<%= node['mysql']['benchmark_user_password'] %>';
+GRANT NDB_STORED_USER ON *.* TO <%= node['mysql']['benchmark_user'] %>@'%';
+GRANT ALL PRIVILEGES ON ycsb.* TO <%= node['mysql']['benchmark_user'] %>@'%';
+CREATE DATABASE IF NOT EXISTS ycsb;
+use ycsb;
+DROP TABLE IF EXISTS usertable;
+CREATE TABLE usertable (YCSB_KEY VARCHAR(255) PRIMARY KEY, FIELD0 varchar(100), FIELD1 varchar(100), FIELD2 varchar(100), FIELD3 varchar(100), FIELD4 varchar(100), FIELD5 varchar(100), FIELD6 varchar(100), FIELD7 varchar(100), FIELD8 varchar(100), FIELD9 varchar(100));

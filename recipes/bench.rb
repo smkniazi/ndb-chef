@@ -104,19 +104,20 @@ cookbook_file "#{dbt2_multi_dir}/dbt2_run_1.conf" do
   mode 0750
 end
 
+#exec = "#{node['ndb']['scripts_dir']}/mysql-client.sh"
+#bash 'create-bench-db-and-user' do
+#  user "root"
+#  code <<-EOF
+#      set -e
+#      #{exec} -e \"CREATE DATABASE IF NOT EXISTS ycsb\"
+#      #{exec} -e \"CREATE USER IF NOT EXISTS \'#{node['mysql']['benchmark_user']}\'@\'%\' IDENTIFIED BY \'#{node['mysql']['benchmark_user_password']}\';\"
+#      #{exec} -e \"GRANT NDB_STORED_USER ON *.* TO \'#{node['mysql']['benchmark_user']}\'@\'%\';\"
+#      #{exec} -e \"GRANT ALL PRIVILEGES ON ycsb.* TO \'#{node['mysql']['benchmark_user']}\'@\'%\';\"
+#      #{exec} ycsb -e \"CREATE TABLE IF NOT EXISTS usertable (YCSB_KEY VARCHAR(255) PRIMARY KEY, FIELD0 varchar(100), FIELD1 varchar(100), FIELD2 varchar(100), FIELD3 varchar(100), FIELD4 varchar(100), FIELD5 varchar(100), FIELD6 varchar(100), FIELD7 varchar(100), FIELD8 varchar(100), FIELD9 varchar(100));\"
+#    EOF
+#end
 
-exec = "#{node['ndb']['scripts_dir']}/mysql-client.sh"
-bash 'create-bench-db-and-user' do
-  user "root"
-  code <<-EOF
-      set -e
-      #{exec} -e \"CREATE DATABASE IF NOT EXISTS ycsb\"
-      #{exec} -e \"CREATE USER IF NOT EXISTS \'#{node['mysql']['benchmark_user']}\'@\'%\' IDENTIFIED BY \'#{node['mysql']['benchmark_user_password']}\';\"
-      #{exec} -e \"GRANT NDB_STORED_USER ON *.* TO \'#{node['mysql']['benchmark_user']}\'@\'%\';\"
-      #{exec} -e \"GRANT ALL PRIVILEGES ON ycsb.* TO \'#{node['mysql']['benchmark_user']}\'@\'%\';\"
-      #{exec} ycsb -e \"CREATE TABLE IF NOT EXISTS usertable (YCSB_KEY VARCHAR(255) PRIMARY KEY, FIELD0 varchar(100), FIELD1 varchar(100), FIELD2 varchar(100), FIELD3 varchar(100), FIELD4 varchar(100), FIELD5 varchar(100), FIELD6 varchar(100), FIELD7 varchar(100), FIELD8 varchar(100), FIELD9 varchar(100));\"
-    EOF
-end
+ndb_connectstring()
 
 include_recipe "java"
 

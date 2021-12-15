@@ -2,4 +2,11 @@ db.driver=com.mysql.cj.jdbc.MysqlDataSource
 db.url=jdbc:mysql://<%= @mysqld_host %>/ycsb
 db.user=<%= node['mysql']['benchmark_user'] %>
 db.passwd=<%= node['mysql']['benchmark_user_password'] %>
+rondb.connection.string=<%= node['ndb']['connectstring'] %>
+rondb.schema=ycsb
+fieldcount=1
+threadcount=100
+table=usertable
+fieldlength=100
+fieldnameprefix=FIELD
 

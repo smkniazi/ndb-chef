@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-bin/ycsb run jdbc -P workloads/workloada -P db.properties -p "threadcount=10" -cp lib/<%= node['mysql']['mysql_connector'] %>
+bin/ycsb run jdbc -P workloads/workloada -P db.properties -cp lib/<%= node['mysql']['mysql_connector'] %>
