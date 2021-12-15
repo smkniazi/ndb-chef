@@ -258,3 +258,8 @@ default['ndb']['mysqld_exporter']['url']                    = "#{node['download_
 default['ndb']['mysqld_exporter']['home']                   = "#{node['ndb']['dir']}/mysqld_exporter-#{node['ndb']['mysqld_exporter']['version']}.linux-amd64"
 default['ndb']['mysqld_exporter']['base_dir']               = "#{node['ndb']['dir']}/mysqld_exporter"
 default['ndb']['mysqld']['metrics_port']                    = "9104"
+
+#jdbc connector jar
+default['mysql']['mysql_connector']                     = "mysql-connector-java-8.0.21-bin.jar"
+default['mysql']['benchmark_user']                 = "bench"
+default['mysql']['benchmark_user_password']          = "bench"

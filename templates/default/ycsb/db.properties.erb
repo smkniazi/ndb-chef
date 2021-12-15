@@ -1,0 +1,5 @@
+db.driver=com.mysql.cj.jdbc.MysqlDataSource
+db.url=jdbc:mysql://<%= @mysqld_host %>/ycsb
+db.user=<%= node['mysql']['benchmark_user'] %>
+db.passwd=<%= node['mysql']['benchmark_user_password'] %>
+
